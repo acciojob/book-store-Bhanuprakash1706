@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Random;
 
 @RestController
 @RequestMapping("books")
@@ -16,6 +17,8 @@ public class BookController {
     // One example controller, make the rest by yourself
     @PostMapping("/create-book")
     public ResponseEntity<Book> createBook(@RequestBody Book book){
+        Random random=new Random();
+        book.setId(random.nextInt(1000));
         Book newbook = bookService.createBook(book);
         return new ResponseEntity<>(newbook, HttpStatus.CREATED);
     }
