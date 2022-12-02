@@ -18,7 +18,11 @@ public class BookController {
     @PostMapping("/create-book")
     public ResponseEntity<Book> createBook(@RequestBody Book book){
         Random random=new Random();
-        book.setId(random.nextInt(1000));
+        int num=random.nextInt(1000);
+        while(num==0){
+            num= random.nextInt();
+        }
+        book.setId(num);
         Book newbook = bookService.createBook(book);
         return new ResponseEntity<>(newbook, HttpStatus.CREATED);
     }
