@@ -7,20 +7,17 @@ import org.springframework.stereotype.Repository;
 public class BookRepository {
     HashMap<Integer,Book> map=new HashMap<>();
     public BookRepository(){
-        
+
     }
 
     public Book save(Book book){
+        book.setId(map.size()+1);
         map.put(book.getId(), book);
         return book;
     }
 
     public Book findBookById(int id){
-        for(int key: map.keySet()){
-            if(Objects.equals(id,key))
-                return map.get(id);
-        }
-        return null;
+        return map.get(id);
     }
 
     public List<Book> findAll(){
